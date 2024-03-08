@@ -18,8 +18,9 @@ jobs:
           project_type: skip
           dockerfile: ${{ env.DOCKERFILE_PATH }}
           push: false
-          image_tag1: v1
-          image_tag2: latest
+          image_tag1: |
+            v2
+            latest2
   push_to_prod_registry:
     needs: build_and_test
     runs-on: ubuntu-latest
