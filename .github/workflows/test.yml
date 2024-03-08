@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: jothimanideriv/ghaction-poc
+  IMAGE_NAME: shivanandderiv/ghactions
   DOCKERFILE_PATH: "./Dockerfile"
     
 jobs:
@@ -18,19 +18,20 @@ jobs:
           project_type: skip
           dockerfile: ${{ env.DOCKERFILE_PATH }}
           push: false
-          image_tag1: latest1
-  # push_to_prod_registry:
-  #   needs: build_and_test
-  #   runs-on: ubuntu-latest
-  #   environment: production-registry    
-  #   steps:
-  #     - uses: deriv-iac/shared-actions/push_to_registry@master
-  #       with:
-  #         images: ${{ env.IMAGE_NAME }}
-  #         dockerfile: ${{ env.DOCKERFILE_PATH }}
-  #         push: true
-  #         username: ${{ secrets.USERNAME }}
-  #         password: ${{ secrets.PASSWORD }}
+          image_tag1: v1
+          image_tag2: latest
+  push_to_prod_registry:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+    environment: production-registry    
+    steps:
+      - uses: deriv-iac/shared-actions/push_to_registry@multiple_tags_input
+        with:
+          images: ${{ env.IMAGE_NAME }}
+          dockerfile: ${{ env.DOCKERFILE_PATH }}
+          push: true
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
   # k3s_deployment:
   #   needs: push_to_prod_registry
   #   runs-on: ubuntu-latest
