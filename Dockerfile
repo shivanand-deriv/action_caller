@@ -5,5 +5,6 @@ FROM ubuntu:20.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 USER nobody
+
 # Example: Run a simple application or service
 CMD ["echo", "Hello, World!"]
