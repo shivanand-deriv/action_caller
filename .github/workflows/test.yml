@@ -18,7 +18,7 @@ jobs:
           project_type: skip
           dockerfile: ${{ env.DOCKERFILE_PATH }}
           push: false
-          image_tag1: |
+          tags: |
             v2
             latest2
   push_to_prod_registry:
